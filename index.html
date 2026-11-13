@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Bd Official - Earning & Investment Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans pb-24">
+
+    <!-- App Container -->
+    <div id="app" class="max-w-md mx-auto bg-slate-900 min-h-screen relative shadow-2xl overflow-hidden border border-slate-800">
+        
+        <!-- Header -->
+        <header id="app-header" class="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex justify-between items-center shadow-lg sticky top-0 z-30 hidden">
+            <div class="flex items-center space-x-2.5">
+                <div onclick="openProfileModal()" class="bg-white/20 border border-white/30 text-white font-bold p-2 rounded-full w-10 h-10 flex items-center justify-center text-lg cursor-pointer shadow hover:bg-white/30 transition backdrop-blur-sm" title="Profile">T</div>
+                <div onclick="switchTab('home')" class="cursor-pointer">
+                    <span class="text-lg font-black tracking-wider bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Task Bd Official</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="openAdminModal()" class="bg-slate-900/40 hover:bg-slate-900/60 text-xs px-3 py-1.5 rounded-lg font-semibold transition border border-white/20 backdrop-blur-sm">
+                    <i class="fa-solid fa-lock mr-1"></i> Admin
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="p-4 space-y-4">
+            <!-- Dynamic Content -->
+        </main>
+
+        <!-- Bottom Navigation Bar -->
+        <nav id="bottom-nav" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex justify-around py-3 text-xs text-slate-400 z-30 shadow-2xl hidden">
+            <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-blue-500 transition hover:text-blue-400">
+                <i class="fa-solid fa-house text-lg mb-1"></i>
+                <span class="font-medium">হোম</span>
+            </button>
+            <button onclick="switchTab('tasks')" id="nav-tasks" class="flex flex-col items-center hover:text-blue-500 transition">
+                <i class="fa-solid fa-list-check text-lg mb-1"></i>
+                <span class="font-medium">টাস্ক</span>
+            </button>
+            <button onclick="switchTab('plans')" id="nav-plans" class="flex flex-col items-center hover:text-blue-500 transition">
+                <i class="fa-solid fa-gem text-lg mb-1"></i>
+                <span class="font-medium">প্ল্যানস</span>
+            </button>
+            <button onclick="switchTab('spin')" id="nav-spin" class="flex flex-col items-center hover:text-blue-500 transition">
+                <i class="fa-solid fa-dharmachakra text-lg mb-1 text-amber-400"></i>
+                <span class="font-medium">স্পিন</span>
+            </button>
+            <button onclick="switchTab('refer')" id="nav-refer" class="flex flex-col items-center hover:text-blue-500 transition">
+                <i class="fa-solid fa-users text-lg mb-1 text-emerald-400"></i>
+                <span class="font-medium">রেফার</span>
+            </button>
+            <button onclick="switchTab('chat')" id="nav-chat" class="flex flex-col items-center hover:text-blue-500 transition relative">
+                <i class="fa-solid fa-headset text-lg mb-1"></i>
+                <span class="font-medium">সাপোর্ট</span>
+            </button>
+        </nav>
+
+        <!-- Profile Modal -->
+        <div id="profile-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-slate-700 w-full max-w-sm rounded-2xl p-5 space-y-4 relative shadow-2xl">
+                <button onclick="closeProfileModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                <div class="text-center space-y-2 pt-2">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full mx-auto flex items-center justify-center text-2xl font-bold text-white shadow-lg ring-4 ring-blue-500/20">T</div>
+                    <h3 id="profile-modal-user" class="font-bold text-sm text-white truncate px-4">user@gmail.com</h3>
+                    <p class="text-xs text-blue-400 bg-blue-500/10 py-1 px-3 rounded-full inline-block border border-blue-500/20">Active Plan: <span id="profile-modal-plan" class="font-semibold">Free Tier</span></p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2.5 text-xs">
+                    <div class="flex justify-between"><span class="text-slate-400">মূল ব্যালেন্স:</span><span id="profile-modal-bal" class="text-emerald-400 font-bold">0.00 BDT</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">বোনাস ব্যালেন্স:</span><span id="profile-modal-bonus" class="text-amber-400 font-bold">0.00 BDT</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">মোট ডিপোজিট:</span><span id="profile-modal-dep" class="text-blue-400 font-bold">0.00 BDT</span></div>
+                </div>
+                <button onclick="closeProfileModal(); switchTab('account');" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-xl text-xs font-semibold text-white shadow-lg shadow-blue-600/30 transition">একাউন্ট সেটিংস</button>
+            </div>
+        </div>
+
+        <!-- Admin Login / Panel Modal -->
+        <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-slate-700 w-full max-w-sm rounded-2xl p-5 space-y-4 relative shadow-2xl">
+                <button onclick="closeAdminModal()" class="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                <div id="admin-login-view">
+                    <h3 class="text-lg font-bold text-blue-400 mb-1 flex items-center"><i class="fa-solid fa-shield-halved mr-2"></i>এডমিন প্যানেল</h3>
+                    <p class="text-xs text-slate-400 mb-4">কন্ট্রোল করতে সিক্রেট পাসওয়ার্ড দিন।</p>
+                    <input type="password" id="admin-pass-input" placeholder="পাসওয়ার্ড লিখুন" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white mb-3 focus:outline-none focus:border-blue-500">
+                    <button onclick="verifyAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl font-semibold text-xs shadow-lg shadow-blue-600/30 transition">লগইন করুন</button>
+                </div>
+                <div id="admin-dashboard-view" class="hidden space-y-4 max-h-[80vh] overflow-y-auto pr-1">
+                    <!-- Admin Dynamic Content -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
